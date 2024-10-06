@@ -9,6 +9,7 @@ const NavigationBar = () => {
           <Container>
             <Navbar.Brand href="/">Navbar</Navbar.Brand>
             <Nav className="me-auto">
+              {/* Use React Router's Link to handle navigation between different pages */}
               <Nav.Link href="/">Home</Nav.Link>
               <Nav.Link href="/create">Create</Nav.Link>
               <Nav.Link href="/read">Read</Nav.Link>
