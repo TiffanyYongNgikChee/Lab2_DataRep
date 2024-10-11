@@ -4,6 +4,8 @@ import NavigationBar from './components/navbar';
 import Header from './components/Header';
 import Footer from './components/Footer';
 import Content from './components/Content';
+import Create from './components/Create';
+import Read from './components/Read';
 
 function App() {
   return (
@@ -13,8 +15,8 @@ function App() {
         {/*add routing logic. Each route will display a different component when its respective link is clicked*/}
         {/*Client side routing allows my app to update the URL from a link click without making another request for another document from the server. */}
         <Route path="/home" element={<Content />} />
-        <Route path="/read" element={<h1><Footer /></h1>} />
-        <Route path="/create" element={<h1><Header /></h1>} />
+        <Route path="/read" element={<Read></Read>} />
+        <Route path="/create" element={<Create></Create>} />
       </Routes>
       <Footer />
     </Router>
