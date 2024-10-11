@@ -1,9 +1,10 @@
+import MovieItem from "./movieitem";
+
 const Movies = (props)=>{
-    return(
-        <div>
-            My movie
-            {console.log(props.myMovies)}
-        </div>
-    );
+    return props.myMovies.map(
+        ()=>{
+            return <MovieItem/>
+        }
+    )
 }
 export default Movies;
