@@ -1,57 +1,69 @@
+// Importing the useState hook from React for managing component state
 import { useState } from "react";
 
+// Create functional component to handle adding a new movie
 const Create = () => {
-  const [title, setTitle] = useState('');
-  const [year, setYear] = useState('');
-  const [poster, setPoster] = useState('');
+  // State variables for storing movie details (title, year, poster)
+  const [title, setTitle] = useState(''); // Movie title state
+  const [year, setYear] = useState('');   // Movie year state
+  const [poster, setPoster] = useState(''); // Movie poster URL state
 
-  const handleSubmit = (e) =>{
-    e.preventDefault();
+  // Function to handle form submission
+  const handleSubmit = (e) => {
+    e.preventDefault(); // Prevent the default form submission behavior
+    // Log the current values of the state variables to the console
     console.log(title);
     console.log(year);
     console.log(poster);
   }
 
-    return (
-      <div>
-        <h3>Hello from create component</h3>
+  return (
+    <div>
+      <h3>Hello from create component</h3>
 
-        <form onSubmit={handleSubmit}>
-          {/*Movie Title */}
-          <div className="form-group">
-            <label>Add Movie Title: </label>
-            <input type="text"
-              className="form-control"
-              value={title}
-              onChange={(e) => {setTitle(e.target.value)}} 
-            />
-          </div>
-          {/*Movie Year */}
-          <div className="form-group">
-            <label>Add Movie Year: </label>
-            <input type="text"
-              className="form-control"
-              value={year}
-              onChange={(e) => {setYear(e.target.value)}} 
-            />
-          </div>
-          {/*Movie Poster */}
-          <div className="form-group">
-            <label>Add Movie Poster: </label>
-            <input type="text"
-              className="form-control"
-              value={poster}
-              onChange={(e) => {setPoster(e.target.value)}} 
-            />
-          </div>
+      {/* Form for adding a new movie */}
+      <form onSubmit={handleSubmit}>
+        {/* Movie Title Input Field */}
+        <div className="form-group">
+          <label>Add Movie Title: </label>
+          <input 
+            type="text"
+            className="form-control"
+            value={title} // Bind input value to title state
+            onChange={(e) => { setTitle(e.target.value) }} // Update title state on input change
+          />
+        </div>
+        
+        {/* Movie Year Input Field */}
+        <div className="form-group">
+          <label>Add Movie Year: </label>
+          <input 
+            type="text"
+            className="form-control"
+            value={year} // Bind input value to year state
+            onChange={(e) => { setYear(e.target.value) }} // Update year state on input change
+          />
+        </div>
+        
+        {/* Movie Poster Input Field */}
+        <div className="form-group">
+          <label>Add Movie Poster: </label>
+          <input 
+            type="text"
+            className="form-control"
+            value={poster} // Bind input value to poster state
+            onChange={(e) => { setPoster(e.target.value) }} // Update poster state on input change
+          />
+        </div>
 
-          <div>
-            <input type="submit" value="Add Movie"></input>
-          </div>
+        {/* Submit Button for the form */}
+        <div>
+          <input type="submit" value="Add Movie" />
+        </div>
+      </form>
+    </div>
+  );
+};
 
-        </form>
-      </div>
-    );
-  };
-  
-  export default Create;
+// Export the Create component to be used in other parts of the app
+export default Create;
