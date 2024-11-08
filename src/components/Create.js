@@ -1,5 +1,6 @@
 // Importing the useState hook from React for managing component state
 import { useState } from "react";
+import axios from "axios";
 
 // Create functional component to handle adding a new movie
 const Create = () => {
@@ -8,14 +9,22 @@ const Create = () => {
   const [year, setYear] = useState('');   // Movie year state
   const [poster, setPoster] = useState(''); // Movie poster URL state
 
-  // Function to handle form submission
+  // create.js
   const handleSubmit = (e) => {
-    e.preventDefault(); // Prevent the default form submission behavior
-    // Log the current values of the state variables to the console
-    console.log(title);
-    console.log(year);
-    console.log(poster);
-  }
+    e.preventDefault();
+    
+    console.log(`Title: ${title}, Year: ${year}, Poster: ${poster}`);
+    
+    const movie = {
+      title: title,
+      year: year,
+      poster: poster
+    };
+    
+    axios.post('http://localhost:4000/api/movies', movie)
+      .then((res) => console.log(res.data))
+      .catch((err) => console.log(err.data));
+  };
 
   return (
     <div>
