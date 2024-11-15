@@ -6,22 +6,18 @@ const MovieItem = (props) => {
     // Render a Card component to display movie details
     // The Card component is styled using inline styles with a fixed width
     return (
-        <Card style={{ width: '18rem' }}>
-            {/* Display the movie's poster image using the Card.Img component */}
-            {/* Access the movie poster from props.myMovies.Poster */}
-            <Card.Img variant="top" src={props.myMovies.Poster} />
-            
+        <div>
+          <Card>
+            <Card.Header>{props.mymovie.title}</Card.Header>
             <Card.Body>
-                {/* Display the movie title using the Card.Title component */}
-                <Card.Title>{props.myMovies.Title}</Card.Title>
-                
-                {/* Display the movie's release year using the Card.Text component */}
-                <Card.Text>
-                    {props.myMovies.Year}
-                </Card.Text>
+              <blockquote className="blockquote mb-0">
+                <img src={props.mymovie.poster} alt={props.mymovie.Title} />
+                <footer>{props.mymovie.year}</footer>
+              </blockquote>
             </Card.Body>
-        </Card>
-    );
+          </Card>
+        </div>
+      );
 }
 
 // Export the MovieItem component to be used in other parts of the application

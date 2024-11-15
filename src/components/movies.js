@@ -9,7 +9,7 @@ const Movies = (props) => {
             // Render a MovieItem component for each movie in the array
             // Pass the movie object as a prop (myMovies)
             // Use the unique imdbID as the key to avoid the "missing key" warning
-            return <MovieItem myMovies={movie} key={movie.imdbID}/>
+            return <MovieItem myMovies={movie} key={movie._id}/>
         }
     );
 }

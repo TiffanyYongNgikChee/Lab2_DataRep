@@ -13,9 +13,6 @@ const Read = () => {
   // useEffect hook to perform a side effect (fetching data) when the component mounts
   useEffect(
     () => {
-      for(let i =0;i<1000000;i++){
-        
-      }
     // Using axios to make a GET request to fetch movie data from the given URL
     axios
       .get('https://http://localhost:4000/api/movies')

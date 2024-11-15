@@ -7,7 +7,18 @@ const bodyParser = require('body-parser'); // Import body-parser for handling re
 
 // Middleware to parse incoming request bodies
 app.use(bodyParser.urlencoded({ extended: true })); // Parse URL-encoded data
-app.use(bodyParser.json());                         // Parse JSON data
+app.use(bodyParser.json());  // Parse JSON data
+
+const mongoose = require('mongoose');
+mongoose.connect('mongodb+srv://Admin:Admin@cluster0.uxdft.mongodb.net/DB11');
+
+const movieSchema = new mongoose.Schema({
+  title: String,
+  year: String,
+  poster: String
+});
+
+const movieModel = mongoose.model('MyMovie', movieSchema);
 
 // Enable CORS to allow requests from any origin
 const cors = require('cors');
@@ -22,9 +33,38 @@ app.use(function(req, res, next) {
 });
 
 // Define GET endpoint for retrieving a list of movies
-app.get('/api/movies', (req, res) => {
+app.get('/api/movies', async(req, res) => {
     // Sample movie data array
-    const movies = [
+    const movies = await movieModel.find({});
+    res.status(200).json(movies);
+   
+        
+});
+
+app.get('/api/movie/:id',async(req,res)=>{
+  const movie = movieModel.findById(req.params.id);
+  res.json(movie);
+})
+
+// Define POST endpoint for receiving new movie data
+app.post('/api/movies', async(req, res) => {
+  console.log("Movies: " + req.body); // Log the received movie data
+  
+  const { title, year, poster } = req.body;
+  const newMovie = new movieModel({ title, year, poster });
+  await newMovie.save();
+
+  res.status(201).json({ message: 'Movie created successfully', movie: newMovie });
+});
+
+
+
+// Start the server and listen on the specified port
+app.listen(port, () => {
+    console.log(`Server is running on http://localhost:${port}`);
+});
+
+/* const movies = [
           {
             "Title": "Avengers: Infinity War (server)",
             "Year": "2018",
@@ -46,19 +86,7 @@ app.get('/api/movies', (req, res) => {
             "Type": "movie",
             "Poster": "https://m.media-amazon.com/images/M/MV5BNDQ4YzFmNzktMmM5ZC00MDZjLTk1OTktNDE2ODE4YjM2MjJjXkEyXkFqcGdeQXVyNTA4NzY1MzY@._V1_SX300.jpg"
           }
-        ];
-        
-    // Send movie data as JSON response
-    res.json({movies});
-});
-
-// Define POST endpoint for receiving new movie data
-app.post('/api/movies', (req, res) => {
-  console.log("Movies: " + req.body); // Log the received movie data
-  res.send("movie received");         // Send confirmation response
-});
-
-// Start the server and listen on the specified port
-app.listen(port, () => {
-    console.log(`Server is running on http://localhost:${port}`);
-});
+        ]; 
+        // Send movie data as JSON response
+        res.json({movies})
+        */
