@@ -6,6 +6,7 @@ import Footer from './components/Footer';
 import Content from './components/Content';
 import Create from './components/Create';
 import Read from './components/Read';
+import Edit from './components/edit';
 
 function App() {
   return (
@@ -17,6 +18,7 @@ function App() {
         <Route path="/home" element={<Content />} />
         <Route path="/read" element={<Read></Read>} />
         <Route path="/create" element={<Create></Create>} />
+        <Route path="/edit/:id" element={<Edit></Edit>} />
       </Routes>
       <Footer />
     </Router>
