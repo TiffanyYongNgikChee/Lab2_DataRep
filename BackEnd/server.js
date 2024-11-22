@@ -36,13 +36,12 @@ app.use(function(req, res, next) {
 app.get('/api/movies', async(req, res) => {
     // Sample movie data array
     const movies = await movieModel.find({});
-    res.status(200).json(movies);
+    res.status(200).json({movies})
    
-        
 });
 
-app.get('/api/movie/:id',async(req,res)=>{
-  const movie = movieModel.findById(req.params.id);
+app.get('/api/movies/:id',async(req,res)=>{
+  const movie = await movieModel.findById(req.params.id);
   res.json(movie);
 })
 

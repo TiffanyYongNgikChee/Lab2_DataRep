@@ -15,7 +15,7 @@ const Read = () => {
     () => {
     // Using axios to make a GET request to fetch movie data from the given URL
     axios
-      .get('https://http://localhost:4000/api/movies')
+      .get('http://localhost:4000/api/movies')
       .then((response) => {
         // Log the fetched data to the console for debugging
         console.log(response.data);
