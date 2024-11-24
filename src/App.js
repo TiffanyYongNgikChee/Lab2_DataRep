@@ -18,6 +18,7 @@ function App() {
         <Route path="/home" element={<Content />} />
         <Route path="/read" element={<Read></Read>} />
         <Route path="/create" element={<Create></Create>} />
+        {/*The route allows users to navigate to the Edit component when they want to edit a specific movie.*/}
         <Route path="/edit/:id" element={<Edit></Edit>} />
       </Routes>
       <Footer />

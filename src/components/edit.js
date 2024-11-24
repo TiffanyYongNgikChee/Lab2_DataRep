@@ -1,59 +1,58 @@
 // Importing the useState hook from React for managing component state
+import React from 'react';
 import { useEffect, useState } from "react";
 import axios from "axios";
 import { useParams } from "react-router-dom";
 import { useNavigate } from "react-router-dom";
 
-// Create functional component to handle adding a new movie
+// Create functional component to handle editing an existing movie
 const Edit = () => {
 
-  // State variables for storing movie details (title, year, poster)
-  const id = useParams();
+  // State variables for storing and managing movie details (title, year, poster)
+  let { id } = useParams(); // Extracting movie ID from route parameters
   const [title, setTitle] = useState(''); // Movie title state
   const [year, setYear] = useState('');   // Movie year state
   const [poster, setPoster] = useState(''); // Movie poster URL state
-  const navigate = useNavigate();
+  const navigate = useNavigate(); // Hook for programmatic navigation
 
-  useEffect(()=>{
-    axios.get('http://localhost:4000/api/movies/' + id)
+  // Fetching the current movie details when component mounts or id changes
+  useEffect(() => {
+    axios.get('http://localhost:4000/api/movies/' + id) // API call to get movie data by ID
         .then((response) => {
-            setTitle(response.data.title);
-            setYear(response.data.year);
-            setPoster(response.data.poster);
+            setTitle(response.data.title); // Set movie title in state
+            setYear(response.data.year);   // Set movie year in state
+            setPoster(response.data.poster); // Set movie poster URL in state
         })
         .catch((error) => {
-            console.log(error);
+            console.log(error); // Log error if API call fails
         });
-  },[id]);
+  }, [id]); // Dependency array ensures effect runs when id changes
 
-  // create.js
+  // Event handler for form submission to edit movie details
   const handleSubmit = (e) => {
-    e.preventDefault();
+    e.preventDefault(); // Prevent default form submission behavior
     
-    console.log(`Title: ${title}, Year: ${year}, Poster: ${poster}`);
+    console.log(`Title: ${title}, Year: ${year}, Poster: ${poster}`); // Debugging log for submitted data
     
     const movie = {
-      title: title,
-      year: year,
-      poster: poster
+      title: title, // Updated title
+      year: year,   // Updated year
+      poster: poster // Updated poster URL
     };
 
-    axios.put('http://localhost:4000/api/movies/'+id, movie)
+    // API call to update movie details in the database
+    axios.put('http://localhost:4000/api/movies/' + id, movie)
         .then((res) => {
-            console.log(res.data);
-            navigate('/read');
+            console.log(res.data); // Log response data
+            navigate('/read'); // Navigate to 'read' page upon successful update
         });
-    
-    //axios.post('http://localhost:4000/api/movies', movie)
-    //  .then((res) => console.log(res.data))
-    //  .catch((err) => console.log(err.data));
   };
 
   return (
     <div>
-      <h3>Hello from create component</h3>
+      <h3>Edit Movie Details</h3>
 
-      {/* Form for adding a new movie */}
+      {/* Form for editing movie details */}
       <form onSubmit={handleSubmit}>
         {/* Movie Title Input Field */}
         <div className="form-group">
@@ -90,12 +89,12 @@ const Edit = () => {
 
         {/* Submit Button for the form */}
         <div>
-          <input type="submit" value="Edit Movie" />
+          <input type="submit" value="Edit Movie" className="btn btn-primary" />
         </div>
       </form>
     </div>
   );
 };
 
-// Export the Create component to be used in other parts of the app
+// Export the Edit component to be used in other parts of the app
 export default Edit;
