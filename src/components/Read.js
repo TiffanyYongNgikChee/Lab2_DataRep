@@ -9,30 +9,31 @@ import Movies from "./movies";
 const Read = () => {
   // State variable for storing the movies data
   const [movies, setMovies] = useState([]);
+  const [data, setData] = useState([]);
+
+  const Reload = () => {
+    console.log("Reloading movie data...");
+    axios.get('http://localhost:4000/api/movies')
+        .then((response) => {
+            setMovies(response.data.movies
+            );
+        })
+        .catch((error) => {
+            console.error("Error reloading data:", error);
+        });
+};
 
   // useEffect hook to perform a side effect (fetching data) when the component mounts
   useEffect(
     () => {
-    // Using axios to make a GET request to fetch movie data from the given URL
-    axios
-      .get('http://localhost:4000/api/movies')
-      .then((response) => {
-        // Log the fetched data to the console for debugging
-        console.log(response.data);
-        // Update the state with the fetched movies data
-        setMovies(response.data.movies);
-      })
-      .catch((error) => {
-        // Handle any errors that occur during the request
-        console.error("Error fetching movie data:", error);
-      });
+      Reload();
   }, []); // Empty dependency array ensures this effect runs only once when the component mounts
 
   return (
     <div>
       <h3>Hello from Read component</h3>
       {/* Render the Movies component, passing the movies state as a prop */}
-      <Movies myMovies={movies} />
+      <Movies myMovies={movies} ReloadData={Reload} />
     </div>
   );
 };
