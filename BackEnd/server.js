@@ -64,12 +64,20 @@ app.post('/api/movies', async (req, res) => {
   res.status(201).json({ message: 'Movie created successfully', movie: newMovie }); // Respond with success message and new movie details
 });
 
+// DELETE endpoint to remove a movie by ID
+// URL format: /api/movies/:id
 app.delete('/api/movies/:id', async (req, res) => {
-  
+
+  // Log the ID of the movie being deleted (useful for debugging)
   console.log('Deleting movie with ID:', req.params.id);
+
+  // Find the movie by its ID and delete it from the database
   const movie = await movieModel.findByIdAndDelete(req.params.id);
+
+  // Respond with a success message and the deleted movie object
   res.status(200).send({ message: "Movie deleted successfully", movie });
 });
+
 
 // Start the server and listen on the specified port
 app.listen(port, () => {

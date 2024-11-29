@@ -34,7 +34,7 @@ const MovieItem = (props) => {
               </blockquote>
             </Card.Body>
             <Link className="btn btn-primary" to={"/edit/" + props.mymovie._id}>Edit</Link>
-            <Button className="btn btn-danger" onClick={handleDelete}>Delete</Button>
+            <Button className="btn btn-danger" onClick={handleDelete}>Delete</Button> {/*ADD A DELETE BUTTON WITH RED COLOR */}
           </Card>
         </div>
       );

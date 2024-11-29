@@ -11,17 +11,24 @@ const Read = () => {
   const [movies, setMovies] = useState([]);
   const [data, setData] = useState([]);
 
-  const Reload = () => {
-    console.log("Reloading movie data...");
-    axios.get('http://localhost:4000/api/movies')
-        .then((response) => {
-            setMovies(response.data.movies
-            );
-        })
-        .catch((error) => {
-            console.error("Error reloading data:", error);
-        });
+// Function to reload movie data from the server
+const Reload = () => {
+
+  // Log a message indicating the data reload process
+  console.log("Reloading movie data...");
+
+  // Make a GET request to the server to fetch all movies
+  axios.get('http://localhost:4000/api/movies')
+      .then((response) => {
+          // On success, update the state with the fetched movie data
+          setMovies(response.data.movies);
+      })
+      .catch((error) => {
+          // Log any errors that occur during the data fetch
+          console.error("Error reloading data:", error);
+      });
 };
+
 
   // useEffect hook to perform a side effect (fetching data) when the component mounts
   useEffect(
